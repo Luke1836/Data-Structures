@@ -6,6 +6,20 @@ struct Stacks{
     struct Stack *next;
 };
 
+void display(struct Stacks *head)
+{
+    struct Stacks *curr = head;
+    if(head == NULL)
+    {
+        printf("The stack is empty!\n");
+        return;
+    }
+    printf("The Stack elements:  ");
+    for(curr = head ; curr != NULL ; curr = curr->next)
+        printf("%d -> ", curr->data);
+    printf("\n");
+}
+
 struct Stacks *insert(struct Stacks *head, int item)
 {
     struct Stacks *curr = head, *newNode;
@@ -21,6 +35,7 @@ struct Stacks *insert(struct Stacks *head, int item)
         newNode->next = head;
         head = newNode;
     }
+    display(head);
     return head;
 }
 
@@ -36,28 +51,15 @@ struct Stacks *pop(struct Stacks *head)
     pred = head;
     head = head->next;    
     free(pred);
+    display(head);
     return head;
-}
-
-void display(struct Stacks *head)
-{
-    struct Stacks *curr = head;
-    if(head == NULL)
-    {
-        printf("The stack is empty!\n");
-        return;
-    }
-    printf("The Stack elements:  ");
-    for(curr = head ; curr != NULL ; curr = curr->next)
-        printf("%d\t", curr->data);
-    printf("\n");
 }
 
 int main()
 {
     struct Stacks *head = NULL;
     int choice, element;
-    printf("Stack Operations\n1. Insert an element\n2. Delete an element\n3.Display\n4. Exit\nEnter your choice\n");
+    printf("Stack Operations\n1. Insert an element\n2. Delete an element\n3. Display\n4. Exit\nEnter your choice\n");
     while(1)
     {
         scanf("%d", &choice);
