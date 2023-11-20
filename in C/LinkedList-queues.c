@@ -1,19 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Define a Node structure for the linked list
 struct Node {
     int data;
     struct Node* next;
 };
 
-// Function to display the elements of the queue
+//Funcition to display the queue
 void display(struct Node* front) {
     if (front == NULL) {
         printf("Queue is empty.\n");
         return;
     }
-
     printf("Queue: ");
     struct Node* current = front;
     while (current != NULL) {
