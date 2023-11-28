@@ -13,7 +13,7 @@ int main()
         cin >> arr[i];
     cout << "Enter the sum to be found" << endl;
     cin >> sum;
-    unordered_map< int , int > mp;
+    unordered_map<int,int> mp;
     int curr_sum;
     int ex_sum;
     for(int i = 0 ; i < n ; i++)
@@ -21,7 +21,6 @@ int main()
         curr_sum += arr[i];
         if(curr_sum == sum);
             count ++;
-    
         ex_sum = curr_sum - sum;
         if(mp.find(ex_sum) != mp.end())
             count += mp[ex_sum];
