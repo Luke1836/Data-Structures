@@ -60,10 +60,7 @@ void infixToPostfix(char* infix, char* postfix) {
                 return;
             } else {
                 pop(stack); // Pop '(' from the stack
-            }
- 
- 
- 
+            } 
         } else { // Operator encountered
             while (!isEmpty(stack) && precedence(infix[i]) <= precedence(stack->array[stack->top])) {
                 postfix[j++] = pop(stack);

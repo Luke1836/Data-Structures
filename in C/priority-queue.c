@@ -55,7 +55,6 @@ void dequeue(struct PriorityQueue* pq) {
         pq->elements[i - 1] = pq->elements[i];
         pq->priorities[i - 1] = pq->priorities[i];
     }
-
     pq->size--;
 }
 
@@ -101,6 +100,5 @@ int main() {
                 printf("Invalid choice. Please try again.\n");
         }
     }
-
     return 0;
 }
