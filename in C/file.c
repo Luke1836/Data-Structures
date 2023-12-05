@@ -12,7 +12,6 @@ compare = strcmp(str, nameList[mid]);
 if(compare == 0)
 {
 printf("The name is found in the file\n%s has been found.\n", str);
-
 exit(0);
 }
 else if(compare > 0)

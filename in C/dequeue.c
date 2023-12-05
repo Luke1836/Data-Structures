@@ -28,8 +28,7 @@ void insertFront(int item) {
             front--;
         }
         dequeue[front] = item;
-        printf("Element %d inserted at the front of the queue.\n", item)
-        ;
+        printf("Element %d inserted at the front of the queue.\n", item);
     }
 }
 
