@@ -1,3 +1,42 @@
+/* #include <iostream>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    for (int j = 0; j < t; j++) {
+        int arr[42];
+        int count = 0;
+
+        for (int i = 0; i < 42; i++)
+            cin >> arr[i];
+
+        for (int i = 0; i < 42; i++) {
+            if (arr[i] != (i + 1)) {
+                if ((i + 1) == arr[(arr[i] - 1)]) {
+                    count++;
+                    int temp = arr[i];
+                    arr[i] = arr[(arr[i] - 1)];
+                    arr[(arr[i] - 1)] = temp;
+                } else {
+                    count += 2;
+                }
+
+                if (count > 1) {
+                    cout << "NO" << endl;
+                    break;
+                }
+            }
+        }
+
+        if (count <= 1)
+            cout << "YES" << endl;
+    }
+
+    return 0;
+} */
+
 #include <iostream>
 using namespace std;
 
