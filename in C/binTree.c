@@ -6,10 +6,11 @@ struct Node {
     int data;
     struct Node *left;
     struct Node *right;
+    struct Node *next; 
 };
 
 struct Queue {
-    int data;
+    struct Node *node;
     struct Queue *next;
 };
 
@@ -28,25 +29,44 @@ struct Queue *createQueue()
     return q;
 }
 
-struct Node *deQueue(struct Queue *Q)
+int isEmpty(struct Queue *Q)
 {
+    return (Q->next == NULL);
+}
+
+struct Queue *enQueue(struct Queue *Q, struct Node *node) {
+    if (Q == NULL) {
+        Q = (struct Queue *)malloc(sizeof(struct Queue));
+        Q->next = NULL;
+        Q->node = node;
+        return Q;
+    }
+    struct Queue *newNode = (struct Queue *)malloc(sizeof(struct Queue));
+    newNode->next = NULL;
+    newNode->node = node;
+    Q->next = newNode;
+    return Q;
+}
+
+struct Node *deQueue(struct Queue *Q) {
     struct Node *temp;
-    while(Q->next->next != NULL)
-        Q = Q->next;
+    if (Q->next == NULL) {
+        return NULL;
+    }
     temp = Q->next;
-    free(Q->next);
+    Q->next = temp->next;
     return temp;
 }
 
-struct Queue *enQueue(struct Queue *Q, struct Node *node)
+void deleteQueue(struct Queue *Q)
 {
-    if(Q == NULL)
+    struct Queue *temp;
+    while(Q != NULL)
     {
-        Q = node;
-        return Q;
+        temp = Q;
+        Q = Q->next;
+        free(temp);
     }
-    Q->next = node;
-    return Q;
 }
 
 struct Node *insertNode(struct Node *root, int value)
@@ -75,7 +95,7 @@ struct Node *insertNode(struct Node *root, int value)
         }
         else{
             temp->right = newNode;
-            deleteQueue();
+            deleteQueue(Q);
             return root;
         }
     }
@@ -108,55 +128,21 @@ void postOrderTraversal(struct Node *root)
     }
 
 }
-struct Node *deleteNode(struct Node *root, int value)
-{
-    if(root == NULL)
-    return NULL;
-    struct Node *curr = root, *parent = NULL, *child, *successor;
-    while(curr != NULL && curr->data != value)
-    {
-        parent = curr;
-        if(curr->left != NULL)
-            curr = curr->left;
-        else
-            curr = curr->right;
+struct Node *deleteNode(struct Node *root) {
+    if (root == NULL) {
+        return NULL;
+    }
 
+    if (root->left == NULL && root->right == NULL) {
+        free(root);
+        return NULL;
     }
-    if(curr == NULL)
-    {
-        printf("The node is not found in the tree\n");
-        return root;
-    }
-    if(curr->left == NULL || curr->right == NULL)
-    {
-        child = (curr->left != NULL) ? curr->left : curr->right;
-        if(parent == NULL)
-        {
-            root->data = child->data;
-            root->left = NULL;
-            root->right = NULL;
-            free(child);
-        }
-        else
-        {
-        if(parent->left == curr)
-            parent->left = child;
-        else
-            parent->right = child;
-        free(curr);
-        }
-    }
-    else
-    {
-        successor = curr->right;
-        while(successor->left != NULL)
-            successor = successor->left;
-        curr->data = successor->data;
-        deleteNode(curr->right, successor->data);
-    }
-    printf("Deletion compeleted!\n");
+
+    root->left = deleteNode(root->left);
+    root->right = deleteNode(root->right);
     return root;
 }
+
 
 int main()
 {
@@ -191,10 +177,10 @@ int main()
                     break;
 
             case 5: printf("Enter the element to be deleted from the binary tree\n");
-                scanf("%d", &value);
-                printf("Node deletion in progress\n");
-                root = deleteNode(root, value);
-                break;
+                    scanf("%d", &value);
+                    printf("Node deletion in progress\n");
+                    root = deleteNode(root);
+                    break;
             case 6: exit(0);
             default: printf("Invalid choice!!!\n Try Again\n");
         }
