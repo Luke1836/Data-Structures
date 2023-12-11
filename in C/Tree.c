@@ -150,6 +150,7 @@ struct Node *deleteLeafNode(struct Node *root, int value) {
     root->right = deleteLeafNode(root->right, value);
     return root;
 }
+
 int main() {
     struct Node *root = NULL;
     int choice, value;
