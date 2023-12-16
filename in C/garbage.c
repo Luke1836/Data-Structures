@@ -45,14 +45,14 @@ void deallocateMemory() {
         return;
     }
 
-    struct LinkedList* blockToDeallocate = memoryHead;
-    memoryHead = blockToDeallocate->next;
+    struct LinkedList* temp = memoryHead;
+    memoryHead = temp->next;
 
     if (memoryHead != NULL) {
         memoryHead->prev = NULL;
     }
 
-    free(blockToDeallocate);
+    free(temp);
     printf("Deallocated memory block.\n");
 }
 
