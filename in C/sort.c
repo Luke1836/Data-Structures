@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX_SIZE 100
 
 // Function prototypes
 void insertionSort(int arr[], int n);
@@ -14,14 +15,26 @@ int partition(int arr[], int low, int high);
 
 int main() {
     int n;
-    printf("Enter the number of elements in the array: ");
-    scanf("%d", &n);
+    int arr[MAX_SIZE];
+    FILE *file;
+    int count = 0;
 
-    int arr[n];
-    printf("Enter the elements of the array:\n");
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
+    // Open the file in read mode
+    file = fopen("input.txt", "r");
+
+    if (file == NULL) {
+        perror("Error opening file");
+        return EXIT_FAILURE;
     }
+    while (fscanf(file, "%d", &arr[count]) == 1) {
+        count++;
+        if (count >= MAX_SIZE) {
+            break;
+        }
+    }
+
+    fclose(file);
+    n = count;  
 
     while (1) {
         printf("\nSorting Algorithms:\n");
@@ -59,8 +72,8 @@ int main() {
         }
 
         printf("Sorted array:\n");
-        for (int i = 0; i < n; i++) {
-            printf("%d ", arr[i]);
+        for (int i = 0; i < count; i++) {
+            printf("%d\t", arr[i]);
         }
         printf("\n");
     }
