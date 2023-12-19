@@ -8,6 +8,10 @@ struct Node {
     struct Node* next;
 };
 
+struct HashTable {
+    struct Node* table[SIZE];
+};
+
 struct Node* createNode(int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     if (newNode != NULL) {
@@ -17,14 +21,15 @@ struct Node* createNode(int data) {
     return newNode;
 }
 
-void insertChaining(int hashTable[], int key, int data) {
+// Function to insert using Chaining
+void insertChaining(struct HashTable* hashTable, int key, int data) {
     int index = key % SIZE;
     struct Node* newNode = createNode(data);
 
-    if (hashTable[index] == NULL) {
-        hashTable[index] = newNode;
+    if (hashTable->table[index] == NULL) {
+        hashTable->table[index] = newNode;
     } else {
-        struct Node* temp = hashTable[index];
+        struct Node* temp = hashTable->table[index];
         while (temp->next != NULL) {
             temp = temp->next;
         }
@@ -32,11 +37,12 @@ void insertChaining(int hashTable[], int key, int data) {
     }
 }
 
-void displayChaining(int hashTable[]) {
+// Function to display using Chaining
+void displayChaining(struct HashTable* hashTable) {
     printf("Hash Table (Chaining):\n");
     for (int i = 0; i < SIZE; i++) {
         printf("%d: ", i);
-        struct Node* temp = hashTable[i];
+        struct Node* temp = hashTable->table[i];
         while (temp != NULL) {
             printf("%d -> ", temp->data);
             temp = temp->next;
@@ -45,16 +51,18 @@ void displayChaining(int hashTable[]) {
     }
 }
 
+// Function to insert using Linear Probing
 void insertLinearProbing(int hashTable[], int key, int data) {
     int index = key % SIZE;
 
     while (hashTable[index] != -1) {
-        index = (index + 1) % SIZE; 
+        index = (index + 1) % SIZE;
     }
 
     hashTable[index] = data;
 }
 
+// Function to display using Linear Probing
 void displayLinearProbing(int hashTable[]) {
     printf("Hash Table (Linear Probing):\n");
     for (int i = 0; i < SIZE; i++) {
@@ -63,14 +71,16 @@ void displayLinearProbing(int hashTable[]) {
 }
 
 int main() {
-    int hashTableChaining[SIZE];
+    // Initialize Chaining hash table
+    struct HashTable chainingHashTable;
     for (int i = 0; i < SIZE; i++) {
-        hashTableChaining[i] = NULL; 
+        chainingHashTable.table[i] = NULL;
     }
 
-    int hashTableLinearProbing[SIZE];
+    // Initialize Linear Probing hash table
+    int linearProbingHashTable[SIZE];
     for (int i = 0; i < SIZE; i++) {
-        hashTableLinearProbing[i] = -1; 
+        linearProbingHashTable[i] = -1;
     }
 
     int choice, key, data;
@@ -88,21 +98,21 @@ int main() {
             case 1:
                 printf("Enter key and data for Chaining: ");
                 scanf("%d %d", &key, &data);
-                insertChaining(hashTableChaining, key, data);
+                insertChaining(&chainingHashTable, key, data);
                 break;
 
             case 2:
-                displayChaining(hashTableChaining);
+                displayChaining(&chainingHashTable);
                 break;
 
             case 3:
                 printf("Enter key and data for Linear Probing: ");
                 scanf("%d %d", &key, &data);
-                insertLinearProbing(hashTableLinearProbing, key, data);
+                insertLinearProbing(linearProbingHashTable, key, data);
                 break;
 
             case 4:
-                displayLinearProbing(hashTableLinearProbing);
+                displayLinearProbing(linearProbingHashTable);
                 break;
 
             case 5:

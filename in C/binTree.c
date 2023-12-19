@@ -1,189 +1,149 @@
-//Program to implement a abinary tree using Linked Lists
-#include <stdio.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-#include <stdlib.h>
-struct Node {
+struct binaryTree{
     int data;
-    struct Node *left;
-    struct Node *right;
-    struct Node *next; 
+    struct binaryTree *left;
+    struct binaryTree *right;    
 };
+struct binaryTree *root=NULL;
 
-struct Queue {
-    struct Node *node;
-    struct Queue *next;
-};
-
-struct Node *createNode(int value)
-{
-    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode->right = newNode->left = NULL;
-    return newNode;
+//creating new nodes
+struct binaryTree* createNode(int data){
+    struct binaryTree *new=(struct binaryTree*)malloc(sizeof(struct binaryTree));
+    new->data=data;
+    new->left=new->right=NULL;
+    return new;
 }
-
-struct Queue *createQueue()
-{
-    struct Queue *q = (struct Queue*)malloc(sizeof(struct Queue));
-    q->next = NULL;
-    return q;
-}
-
-int isEmpty(struct Queue *Q)
-{
-    return (Q->next == NULL);
-}
-
-struct Queue *enQueue(struct Queue *Q, struct Node *node) {
-    if (Q == NULL) {
-        Q = (struct Queue *)malloc(sizeof(struct Queue));
-        Q->next = NULL;
-        Q->node = node;
-        return Q;
-    }
-    struct Queue *newNode = (struct Queue *)malloc(sizeof(struct Queue));
-    newNode->next = NULL;
-    newNode->node = node;
-    Q->next = newNode;
-    return Q;
-}
-
-struct Node *deQueue(struct Queue *Q) {
-    struct Node *temp;
-    if (Q->next == NULL) {
-        return NULL;
-    }
-    temp = Q->next;
-    Q->next = temp->next;
-    return temp;
-}
-
-void deleteQueue(struct Queue *Q)
-{
-    struct Queue *temp;
-    while(Q != NULL)
-    {
-        temp = Q;
-        Q = Q->next;
-        free(temp);
+//preorder traversal
+void preOrder(struct binaryTree *root){
+    if(root){
+        printf("%d ",root->data);
+        preOrder(root->left);
+        preOrder(root->right);
     }
 }
-
-struct Node *insertNode(struct Node *root, int value)
-{
-    struct Queue *Q = createQueue();
-    struct Node *newNode = createNode(value), *temp;
-    if(root == NULL)
-        return newNode;
-    Q = enQueue(Q, root);
-    while(!isEmpty(Q))
-    {
-        temp = deQueue(Q);
-        if(temp->left)
-        {
-            Q = enQueue(Q, temp->left);
+//inorder traversal
+void inOrder(struct binaryTree *root){
+    if(root){
+        inOrder(root->left);
+        printf("%d ",root->data);
+        inOrder(root->right);
+    }
+}
+//postorder traversal
+void postOrder(struct binaryTree *root){
+    if(root){
+        postOrder(root->left);
+        postOrder(root->right);
+        printf("%d ",root->data);
+    }
+}
+//searching node for insertion
+struct binaryTree* searchNode(struct binaryTree *node,int key){
+    if(node==NULL || node->data==key){
+        return node;
+    }
+    struct binaryTree *left=searchNode(node->left,key);
+    if(left!=NULL){
+        return left;
+    }
+    return searchNode(node->right,key);
+}
+//insertion of node
+void insertNode(int key,int data){
+    struct binaryTree *node=root;
+    node=searchNode(node,key);
+    
+    if(node==NULL){
+        printf("No node found");exit(0);
+    }
+    if(node->left==NULL || node->right==NULL){
+        struct binaryTree *new=createNode(data);
+        int ch;
+        printf("1.Left\n2.Right: ");scanf("%d",&ch);
+        if(ch==1){
+            if(node->left==NULL){
+                node->left=new;
+            }
+            else{
+                printf("Left node has been occupied");exit(0);
+            }
         }
-        else{
-            temp->left = newNode;
-            deleteQueue(Q);
-            return root;
-        }
-
-        if(temp->right)
-        {
-            Q = enQueue(Q, temp->right);
-        }
-        else{
-            temp->right = newNode;
-            deleteQueue(Q);
-            return root;
+        if(ch==2){
+            if(node->right==NULL){
+                node->right=new;
+            }else{
+                printf("Right node has been occupied");exit(0);
+            }
         }
     }
-    return root;
-}
-void inorderTraversal(struct Node *root)
-{
-    if(root != NULL) {
-        inorderTraversal(root->left);
-        printf("%d\t", root->data);
-        inorderTraversal(root->right);
+    else{
+        printf("Sub tree of node is already occupied");
+        exit(0);
     }
 }
-void preOrderTraversal(struct Node *root)
-{
-    if(root != NULL)
-    {
-        printf("%d\t", root->data);
-        preOrderTraversal(root->left);
-        preOrderTraversal(root->right);
-    }
-}
-void postOrderTraversal(struct Node *root)
-{
-    if(root != NULL)
-    {
-        postOrderTraversal(root->left);
-        postOrderTraversal(root->right);
-        printf("%d\t", root->data);
-    }
 
+struct binaryTree* searchParent(struct binaryTree *node,int key,struct binaryTree *prev){
+    //struct binaryTree *parent=NULL;
+    if(node==NULL) return NULL;
+    if (node->data == key) {
+        return prev;
+    }
+    struct binaryTree *leftResult = searchParent(node->left, key, node);
+    if (leftResult != NULL) {
+        return leftResult;
+    }
+    return searchParent(node->right, key, node);
 }
-struct Node *deleteNode(struct Node *root) {
+void deleteNode(int key) {
     if (root == NULL) {
-        return NULL;
+        printf("Tree empty\n");
+        return;
     }
 
-    if (root->left == NULL && root->right == NULL) {
-        free(root);
-        return NULL;
-    }
+    struct binaryTree *parent = NULL;
+    parent = searchParent(root, key, NULL);
 
-    root->left = deleteNode(root->left);
-    root->right = deleteNode(root->right);
-    return root;
+    if (parent != NULL) {
+        if (parent->left != NULL && parent->left->data == key) {
+            free(parent->left);
+            parent->left = NULL;
+        } else if (parent->right != NULL && parent->right->data == key) {
+            free(parent->right);
+            parent->right = NULL;
+        } else {
+            printf("Node is not a leaf node. No deletion\n");
+        }
+    } else {
+        printf("Node absent. No deletion\n");
+    }
 }
-
-
-int main()
-{
-    struct Node *root = NULL;
-    int choice, value;
-
-    printf("Binary Tree Operations\n1. Inserting a node into the tree\n2. Inorder Traversal\n3. Preorder Traversal\n4. Postorder Traversal\n5. Delete the node\n6. Exit\n");
-    while(1)
-    {
-        printf("Enter your choice\n");
-        scanf("%d", &choice);
-        switch(choice)
-        {
-            case 1: printf("Enter the value to be inserted\n");
-                    scanf("%d", &value);
-                    root = insertNode(root, value);
-                    break;
-
-            case 2: printf("Inorder Traversal:\n");
-                    inorderTraversal(root);
-                    printf("\n");
-                    break;
-
-            case 3: printf("Preorder Traversal: \n");
-                    preOrderTraversal(root);
-                    printf("\n");
-                    break;
-
-            case 4: printf("Postorder Traversa: \n");
-                    postOrderTraversal(root);
-                    printf("\n");
-                    break;
-
-            case 5: printf("Enter the element to be deleted from the binary tree\n");
-                    scanf("%d", &value);
-                    printf("Node deletion in progress\n");
-                    root = deleteNode(root);
-                    break;
-            case 6: exit(0);
-            default: printf("Invalid choice!!!\n Try Again\n");
+void main(){
+    int data,ch,key,val,del;
+    printf("Enter root data: ");scanf("%d",&data);
+    root=createNode(data);
+    while(1){
+        printf("\n1.Inserting a node\n2.Preorder Traversal\n3.Inorder Traversal\n4.Post-order Traversal\n5.Deletion\n6.Exit\nEnter your choice:\n ");scanf("%d",&ch);
+        switch(ch){
+            case 1:
+                printf("Enter root node and data of new node: ");
+                scanf("%d %d",&key,&val);
+                insertNode(key,val);break;
+            case 2:printf("\nPreOrder traversal: ");
+                preOrder(root);
+                break;
+            case 3:printf("\nInOrder traversal: ");
+                inOrder(root);
+                break;
+            case 4:printf("\nPostOrder traversal: ");
+                postOrder(root);
+                break;
+            case 5:printf("Enter the element to be deleted: ");
+                scanf("%d",&del);
+                deleteNode(del);
+                break;
+            case 6:exit(0);
         }
     }
-    return 0;
 }

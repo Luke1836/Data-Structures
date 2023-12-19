@@ -35,7 +35,10 @@ int main() {
 
     fclose(file);
     n = count;  
-
+    printf("Original array:\n");
+        for (int i = 0; i < count; i++) {
+            printf("%d\t", arr[i]);
+        }
     while (1) {
         printf("\nSorting Algorithms:\n");
         printf("1. Insertion Sort\n");
