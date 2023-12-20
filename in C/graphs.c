@@ -169,13 +169,12 @@ int main() {
     }
 
     printf("\nGraph Operations:\n");
+    printf("1. Compute adjacency list and adjacency matrix\n");
+    printf("2. Perform a depth-first search\n");
+    printf("3. Perform a breadth-first search\n");
+    printf("4. Exit\n");
     while (1) {
-        printf("1. Compute adjacency list and adjacency matrix\n");
-        printf("2. Perform a depth-first search\n");
-        printf("3. Perform a breadth-first search\n");
-        printf("4. Exit\n");
         printf("Enter your choice: ");
-
         int choice;
         scanf("%d", &choice);
 

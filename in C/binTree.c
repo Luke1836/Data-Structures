@@ -123,8 +123,10 @@ void main(){
     int data,ch,key,val,del;
     printf("Enter root data: ");scanf("%d",&data);
     root=createNode(data);
+    printf("\n1.Inserting a node\n2.Preorder Traversal\n3.Inorder Traversal\n4.Post-order Traversal\n5.Deletion\n6.Exit\n");
     while(1){
-        printf("\n1.Inserting a node\n2.Preorder Traversal\n3.Inorder Traversal\n4.Post-order Traversal\n5.Deletion\n6.Exit\nEnter your choice:\n ");scanf("%d",&ch);
+        printf("Enter your choice:\n ");
+        scanf("%d",&ch);
         switch(ch){
             case 1:
                 printf("Enter root node and data of new node: ");

@@ -83,7 +83,6 @@ else {
     curr_min = curr_min->next;
 }
 }
-printf("%d %d\n", result->coefficient, result->exponent);
 return result;
 }
 // Function to multiply two polynomials

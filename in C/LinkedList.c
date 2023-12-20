@@ -150,16 +150,16 @@ int main() {
 
     int choice, value, position;
 
+    printf("\nLinked List Operations:\n");
+    printf("1. Display\n");
+    printf("2. Insert at Beginning\n");
+    printf("3. Insert at End\n");
+    printf("4. Insert at Position\n");
+    printf("5. Delete from Beginning\n");
+    printf("6. Delete from End\n");
+    printf("7. Delete from Position\n");
+    printf("8. Exit\n");
     while (1) {
-        printf("\nLinked List Operations:\n");
-        printf("1. Display\n");
-        printf("2. Insert at Beginning\n");
-        printf("3. Insert at End\n");
-        printf("4. Insert at Position\n");
-        printf("5. Delete from Beginning\n");
-        printf("6. Delete from End\n");
-        printf("7. Delete from Position\n");
-        printf("8. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 

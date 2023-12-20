@@ -64,12 +64,12 @@ int main() {
 
     int choice, value;
 
+    printf("\nQueue Operations:\n");
+    printf("1. Enqueue (Insert element)\n");
+    printf("2. Dequeue (Delete element)\n");
+    printf("3. Display\n");
+    printf("4. Exit\n");
     while (1) {
-        printf("\nQueue Operations:\n");
-        printf("1. Enqueue (Insert element)\n");
-        printf("2. Dequeue (Delete element)\n");
-        printf("3. Display\n");
-        printf("4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 

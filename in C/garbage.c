@@ -58,12 +58,11 @@ void deallocateMemory() {
 
 int main() {
     int choice, size;
-
+    printf("1. Allocate Memory\n");
+    printf("2. Deallocate Memory\n");
+    printf("3. Display Memory Status\n");
+    printf("4. Exit\n");
     do {
-        printf("1. Allocate Memory\n");
-        printf("2. Deallocate Memory\n");
-        printf("3. Display Memory Status\n");
-        printf("4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 

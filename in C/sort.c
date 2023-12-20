@@ -39,15 +39,15 @@ int main() {
         for (int i = 0; i < count; i++) {
             printf("%d\t", arr[i]);
         }
-    while (1) {
-        printf("\nSorting Algorithms:\n");
-        printf("1. Insertion Sort\n");
-        printf("2. Selection Sort\n");
-        printf("3. Heap Sort\n");
-        printf("4. Merge Sort\n");
-        printf("5. Quick Sort\n");
-        printf("6. Exit\n");
 
+    printf("\nSorting Algorithms:\n");
+    printf("1. Insertion Sort\n");
+    printf("2. Selection Sort\n");
+    printf("3. Heap Sort\n");
+    printf("4. Merge Sort\n");
+    printf("5. Quick Sort\n");
+    printf("6. Exit\n");
+    while (1) {
         printf("Enter your choice: ");
         int choice;
         scanf("%d", &choice);

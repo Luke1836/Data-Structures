@@ -85,15 +85,14 @@ int main() {
 
     int choice, key, data;
 
+    printf("\n1. Insert (Chaining)\n");
+    printf("2. Display (Chaining)\n");
+    printf("3. Insert (Linear Probing)\n");
+    printf("4. Display (Linear Probing)\n");
+    printf("5. Exit\n");
     do {
-        printf("\n1. Insert (Chaining)\n");
-        printf("2. Display (Chaining)\n");
-        printf("3. Insert (Linear Probing)\n");
-        printf("4. Display (Linear Probing)\n");
-        printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
         switch (choice) {
             case 1:
                 printf("Enter key and data for Chaining: ");
