@@ -34,7 +34,7 @@ void display(Node *head)
     }
 }
 
-Node *mergeList(Node *p1, Node *p2)
+Node* mergeList(Node *p1, Node *p2)
 {
     Node *result = NULL;
     if(p1 == NULL)
@@ -54,7 +54,7 @@ Node *mergeList(Node *p1, Node *p2)
     return result;
 }
 
-void divideList(Node *head, Node *&start, Node *&end)
+void divideList(Node *head, Node *&p1, Node *&p2)
 {
     Node *fast, *slow;
     slow = head;
@@ -69,26 +69,25 @@ void divideList(Node *head, Node *&start, Node *&end)
             fast = fast->next;
         }
     }
-
-    start = head;
-    end = slow->next;
+    p1 = head;
+    p2 = slow->next;
     slow->next = NULL;
 }
 
-
-void mergeSort(Node *head)
+void mergeSort(Node *&head)
 {
     Node *tempHead = head, *p1, *p2;
 
-    if((tempHead == NULL) || (tempHead->next == NULL))
+    if (tempHead == NULL || tempHead->next == NULL)
         return;
-    
+
     divideList(tempHead, p1, p2);
     mergeSort(p1);
     mergeSort(p2);
 
-    tempHead = mergeList(p1, p2);
+    head = mergeList(p1, p2);
 }
+
 
 int main(void)
 {
