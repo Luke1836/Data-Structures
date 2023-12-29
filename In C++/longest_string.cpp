@@ -16,7 +16,7 @@ int main(void)
     for(int r= 0 ; r < len ; r++)
     {
         l = max(l, mapp[str[r]] + 1);
-        maxLen = max(maxLen, r-l-1);
+        maxLen = max(maxLen, r-l+1);
         mapp[str[r]] = r;
     }
 
