@@ -15,9 +15,9 @@ int main(void)
 
     for(int r= 0 ; r < len ; r++)
     {
-        l = max(l, mapp[str[r]] + 1);
-        maxLen = max(maxLen, r-l+1);
-        mapp[str[r]] = r;
+        l = max(l, mapp[str[r]] + 1);       //is the current element present in the taken string or not
+        maxLen = max(maxLen, r-l+1);        //Change the starting index
+        mapp[str[r]] = r;                   //Update the map for the current element
     }
 
     cout << "Maximum length: " << maxLen << endl;
