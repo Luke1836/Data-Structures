@@ -24,12 +24,12 @@ int main(void)
     int x = 0 , y = 0; 
     for(int i = 0 ; i < n ; i++)
     {
-        if(a1[x] < a2[y] && x <= n1)
+        if(a1[x] < a2[y] && x < n1)
         {
             a3[i] = a1[x];
             x++;
         }
-        else if{
+        else {
             a3[i] = a2[y];
             y++;
         }
