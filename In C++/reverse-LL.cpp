@@ -33,15 +33,13 @@ void display()
     }
 }
 
-
 void reverseList()
 {
     if(head == NULL)
         return;
     struct Node *prev = NULL, *next = NULL, *curr = head;
     while(curr != NULL)
-    {
-        next = curr->next;
+    {   next = curr->next;
         curr->next = prev;
         prev = curr;
         curr = next;
