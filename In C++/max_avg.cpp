@@ -14,6 +14,13 @@ int main(void)
     for(int i = 0 ; i < n ; i++)
         cin >> arr[i];
 
-    int n1; //Size of the subarray.
+    int n1; //Store the size of the subarray.
+    cout << "Enter the size of the subarray:" << endl;
+    cin >> n1;
+
+    for(int i = 0 ; i < n ; i++)
+    {
+        
+    }
 
 }
