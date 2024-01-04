@@ -32,16 +32,20 @@ int main(void)
             cout << (mid+1) << endl;
             exit(1);
         }
-        else if(arr[lb] > arr[mid])
+        else if(arr[lb] <= arr[mid])
         {
-            if(element > arr[mid] && arr[lb] < element)
+            if(element < arr[mid] && arr[lb] < element)
                 ub = mid - 1;
             else
                 lb = mid + 1;
 
         }
-        else 
-            lb = mid + 1;
+        else{
+            if(element >= arr[mid] && element <= arr[ub])
+                lb = mid + 1;
+            else
+                ub = mid - 1;
+        }
     }
 
     cout << "-1" << endl;
