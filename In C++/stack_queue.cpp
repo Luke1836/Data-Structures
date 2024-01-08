@@ -13,6 +13,7 @@ class Stack
             curr_size = 0;
         }
 
+        //Push operation
         void push(int data)
         {
             curr_size ++;
@@ -28,7 +29,7 @@ class Stack
             q1 = q2;
             q2 = temp;
         }
-        
+
 };
 
 
