@@ -1,4 +1,4 @@
-/* #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 struct poly {
@@ -84,4 +84,4 @@ int main(void) {
     free(result);
 
     return 0;
-} */
+}
