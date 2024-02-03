@@ -42,24 +42,19 @@ struct poly *addPolynomial(struct poly *p1, struct poly *p2, struct poly *result
 
 struct poly *multiplyPolynomial(struct poly *p1, struct poly *p2, struct poly *result, int n1, int n2, int n3)
 {
-    int coeff1;   
-    int c = 0;
-    for(int i = 0 ; i <= n3 ; i++)
+    for (int i = 0; i <= n3; i++)
     {
         result->coefficient[i] = 0;
+        result->exponent[i] = 0;
     }
 
-    for(int i = 0 ; i <= n1 ; i++)
-    {
-        coeff1 = p1->coefficient[i];
-        for(int j = 0 ; j <= n2 ; j++)
+    for (int i = 0; i <= n1; i++)
+    { for (int j = 0; j <= n2; j++) 
         {
-            c = i + j;
-            result->exponent[c] = p1->exponent[i] + p2->exponent[j];
-            result->coefficient[c] += coeff1 * p2->coefficient[j];
+            result->exponent[i+j] = p1->exponent[i] + p2->exponent[j];
+            result->coefficient[i + j] += (p1->coefficient[i] * p2->coefficient[j]);
         }
     }
-
     return result;
 }
 
@@ -83,7 +78,7 @@ int main(void) {
     } else {
         n3 = n2;
     }
-    int n4 = n1 * n2;
+    int n4 = n1 + n2;
     struct poly *p1 = createPolynomial(n1), *p2 = createPolynomial(n2), *result = createPolynomial(n3), *result_multi = createPolynomial(n4);
 
     for (int i = n1; i >= 0; i--)
