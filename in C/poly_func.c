@@ -40,9 +40,34 @@ struct poly *addPolynomial(struct poly *p1, struct poly *p2, struct poly *result
     return result;
 }
 
+struct poly *multiplyPolynomial(struct poly *p1, struct poly *p2, struct poly *result, int n1, int n2, int n3)
+{
+    int coeff1;   
+    int c = 0;
+    for(int i = 0 ; i <= n3 ; i++)
+    {
+        result->coefficient[i] = 0;
+    }
+
+    for(int i = 0 ; i <= n1 ; i++)
+    {
+        coeff1 = p1->coefficient[i];
+        for(int j = 0 ; j <= n2 ; j++)
+        {
+            c = i + j;
+            result->exponent[c] = p1->exponent[i] + p2->exponent[j];
+            result->coefficient[c] += coeff1 * p2->coefficient[j];
+        }
+    }
+
+    return result;
+}
+
 void display(struct poly *p, int n) {
     printf("The polynomial: \n");
     for (int i = 0; i <= n; i++) { 
+        if(p->coefficient[i] == 0)
+            continue;
         printf("%dx^%d + ", p->coefficient[i], p->exponent[i]);
     }
     printf("\n\n\n");
@@ -58,8 +83,8 @@ int main(void) {
     } else {
         n3 = n2;
     }
-
-    struct poly *p1 = createPolynomial(n1), *p2 = createPolynomial(n2), *result = createPolynomial(n3);
+    int n4 = n1 * n2;
+    struct poly *p1 = createPolynomial(n1), *p2 = createPolynomial(n2), *result = createPolynomial(n3), *result_multi = createPolynomial(n4);
 
     for (int i = n1; i >= 0; i--)
         p1 = insertTerm(p1, i);
@@ -67,9 +92,11 @@ int main(void) {
         p2 = insertTerm(p2, i);
 
     result = addPolynomial(p1, p2, result, n1, n2, n3);
+    result_multi = multiplyPolynomial(p1, p2, result_multi, n1, n2, n4);
     display(p1, n1);
     display(p2, n2);
     display(result, n3);
+    display(result_multi, n4);
 
     free(p1->coefficient);
     free(p1->exponent);
@@ -82,6 +109,10 @@ int main(void) {
     free(result->coefficient);
     free(result->exponent);
     free(result);
+
+    free(result_multi->coefficient);
+    free(result_multi->exponent);
+    free(result_multi);
 
     return 0;
 }
