@@ -50,7 +50,7 @@ void sort(char nameList[][100], int count)
 int main()
 {
     char nameList[100][100];
-    int count = 0; //Kepps count of the number of students in the list
+    int count = 0; //Keeps count of the number of students in the list
     char str[100]; //Storing the name of the student to checked
     char filename[100];
     printf("Enter the file name\n");
