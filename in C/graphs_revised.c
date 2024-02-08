@@ -132,3 +132,86 @@ int main(void) {
 
     return 0;
 }
+
+
+/* #include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_VERTICES 100
+
+// Function to perform Breadth-First Search (BFS)
+void BFS(int matrix[MAX_VERTICES][MAX_VERTICES], int numVertices, int startVertex) {
+    int visited[MAX_VERTICES] = {0};  // Array to keep track of visited vertices
+    int queue[MAX_VERTICES];
+    int front = -1, rear = -1;
+
+    // Enqueue the starting vertex
+    queue[++rear] = startVertex;
+    visited[startVertex] = 1;
+
+    printf("BFS Traversal: ");
+
+    while (front != rear) {
+        int currentVertex = queue[++front];
+        printf("%d ", currentVertex);
+
+        for (int i = 0; i < numVertices; i++) {
+            if (matrix[currentVertex][i] && !visited[i]) {
+                queue[++rear] = i;
+                visited[i] = 1;
+            }
+        }
+    }
+
+    printf("\n");
+}
+
+// Recursive function for Depth-First Search (DFS)
+void DFSRecursive(int matrix[MAX_VERTICES][MAX_VERTICES], int numVertices, int currentVertex, int visited[MAX_VERTICES]) {
+    printf("%d ", currentVertex);
+    visited[currentVertex] = 1;
+
+    for (int i = 0; i < numVertices; i++) {
+        if (matrix[currentVertex][i] && !visited[i]) {
+            DFSRecursive(matrix, numVertices, i, visited);
+        }
+    }
+}
+
+// Function to perform Depth-First Search (DFS)
+void DFS(int matrix[MAX_VERTICES][MAX_VERTICES], int numVertices, int startVertex) {
+    int visited[MAX_VERTICES] = {0};  // Array to keep track of visited vertices
+
+    printf("DFS Traversal: ");
+    DFSRecursive(matrix, numVertices, startVertex, visited);
+    printf("\n");
+}
+
+int main() {
+    int numVertices, numEdges;
+    printf("Enter the number of vertices: ");
+    scanf("%d", &numVertices);
+
+    int matrix[MAX_VERTICES][MAX_VERTICES] = {0};  // Initialize the adjacency matrix with zeros
+
+    printf("Enter the number of edges: ");
+    scanf("%d", &numEdges);
+
+    printf("Enter the edges (startVertex endVertex):\n");
+    for (int i = 0; i < numEdges; i++) {
+        int startVertex, endVertex;
+        scanf("%d %d", &startVertex, &endVertex);
+        matrix[startVertex][endVertex] = 1;
+        matrix[endVertex][startVertex] = 1;  // Assuming an undirected graph
+    }
+
+    int startVertex;
+    printf("Enter the starting vertex for traversal: ");
+    scanf("%d", &startVertex);
+
+    BFS(matrix, numVertices, startVertex);
+    DFS(matrix, numVertices, startVertex);
+
+    return 0;
+}
+ */
