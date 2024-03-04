@@ -1,5 +1,5 @@
 /*
-    Program to remove the duplicate elements in a linked list by using the algorithm with the least time complexity.    
+    Program to remove the duplicate elements from a sorted linked list by using the algorithm with the least time complexity.    
 */
 
 #include <iostream>
