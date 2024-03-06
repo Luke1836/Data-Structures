@@ -24,12 +24,13 @@ void push(int data)
     }
     else
     {
-        /* newNode->next = last->next;
-        last->next = newNode; */
-        while(head->next != last)
+        newNode->next = last->next;
+        last->next = newNode;
+        last = newNode;
+        /* while(head->next != last)
             head = head->next;
         head->next = newNode;
-        newNode->next = last;
+        newNode->next = last; */
     }
 }
 
@@ -40,11 +41,11 @@ void print()
         cout << "The linked List is empty!" << endl;
         return;
     }
-    struct ListNode *temp = last;
+    struct ListNode *temp = last->next;
     do {
         cout << temp->data << "  ";
         temp = temp->next;
-    } while(temp != last);
+    } while(temp != last->next);
 }
 
 int main(void)
