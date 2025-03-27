@@ -19,7 +19,7 @@ int main()
     for(int i = 0 ; i < n ; i++)
     {
         curr_sum += arr[i];
-        if(curr_sum == sum);
+        if(curr_sum == sum)
             count ++;
         ex_sum = curr_sum - sum;
         if(mp.find(ex_sum) != mp.end())
